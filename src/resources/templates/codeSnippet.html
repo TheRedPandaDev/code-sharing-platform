@@ -1,12 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Code</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/styles/codeSnippetStyle.css}" rel="stylesheet">
 </head>
 <body>
-    <!--/*@thymesVar id="snippet" type="platform"*/-->
-    <pre th:text="${snippet}">
+<div>
+    <!--/*@thymesVar id="snippetDate" type="platform"*/-->
+    <span id="load_date" th:text="${snippetDate}">
+    </span>
+    <!--/*@thymesVar id="snippetCode" type="platform"*/-->
+    <pre id="code_snippet" th:text="${snippetCode}">
     </pre>
+</div>
 </body>
 </html>
