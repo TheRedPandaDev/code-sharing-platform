@@ -1,0 +1,16 @@
+#load_date {
+    color: limegreen;
+    margin-bottom: 0;
+}
+
+#code_snippet {
+    border: solid 1px black;
+    background-color: whitesmoke;
+    padding: 5px;
+    margin: 0;
+    width: 500px;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}

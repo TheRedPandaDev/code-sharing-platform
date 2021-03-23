@@ -13,7 +13,13 @@ public class WebInterfaceController {
 
     @GetMapping(path = "/code")
     public String getCodeSnippet(Model model) {
-        model.addAttribute("snippet", codeService.getFirstSnippet().getCode());
+        model.addAttribute("snippetCode", codeService.getSnippet().getCode())
+        .addAttribute("snippetDate", codeService.getSnippet().getDate());
         return "codeSnippet";
+    }
+
+    @GetMapping(path = "/code/new")
+    public String getNewCode(Model model) {
+        return "codeNew";
     }
 }
