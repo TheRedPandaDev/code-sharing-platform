@@ -1,4 +1,5 @@
 # Code Sharing Platform
+*currently in development*
 
 ## API [/api](http://localhost:8889/api)
 
