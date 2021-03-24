@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <title>Latest</title>
+    <link rel="stylesheet" th:href="@{/styles/codeSnippetStyle.css}">
+</head>
+<body>
+<div>
+    <table>
+        <!--/*@thymesVar id="latestCode" type="java.util.List<platform.model.entity.Code>"*/-->
+        <tr th:if="${latestCode.isEmpty()}">
+            <td colspan="2">No code snippets uploaded</td>
+        </tr>
+        <tr th:each="code : ${latestCode}">
+            <!--/*@thymesVar id="code" type="platform.model.entity.Code"*/-->
+            <span id="load_date" th:text="${code.date}">
+            </span>
+            <pre id="code_snippet" th:text="${code.code}">
+            </pre>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

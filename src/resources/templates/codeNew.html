@@ -1,15 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <title>Create</title>
-    <link type="text/css" th:href="@{/styles/codeNewStyle.css}" rel="stylesheet">
-    <script type="text/javascript" th:src="@{/js/codeNewSend.js}"></script>
+    <link rel="stylesheet" th:href="@{/styles/codeNewStyle.css}" type="text/css">
+    <script th:src="@{/js/codeNewSend.js}" type="text/javascript"></script>
 </head>
 <body>
 <div>
     <textarea id="code_snippet" placeholder="// write your code here"></textarea>
-    <button id="send_snippet" type="submit" th:onclick="send()">Submit</button>
+    <button id="send_snippet" th:onclick="send()" type="submit">Submit</button>
 </div>
 </body>
 </html>
