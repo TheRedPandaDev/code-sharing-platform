@@ -3,7 +3,7 @@
 
 ## API [/api](http://localhost:8889/api)
 
-#### GET [/code/{id}](http://localhost:8889/api/code/{id})
+### GET [/code/{id}](http://localhost:8889/api/code/{id})
 Get code snippet by id
 
 Returns JSON:
@@ -14,7 +14,7 @@ Returns JSON:
 }
 ```
 
-#### GET [/code/latest](http://localhost:8889/api/code/latest)
+### GET [/code/latest](http://localhost:8889/api/code/latest)
 Get 10 latest code snippets
 
 Returns JSON array:
@@ -32,7 +32,7 @@ Returns JSON array:
 ]
 ```
 
-#### POST [/code/new](http://localhost:8889/api/code/new)
+### POST [/code/new](http://localhost:8889/api/code/new)
 Post a code snippet
 
 Consumes JSON:
@@ -50,11 +50,11 @@ Returns JSON:
 
 ## Web Interface [/](http://localhost:8889/)
 
-#### GET [/code/{id}](http://localhost:8889/code/{id})
+### GET [/code/{id}](http://localhost:8889/code/{id})
 Get code snippet by id
 
-#### GET [/code/latest](http://localhost:8889/code/latest)
+### GET [/code/latest](http://localhost:8889/code/latest)
 Get 10 latest code snippets
 
-#### GET [/code/new](http://localhost:8889/code/new)
+### GET [/code/new](http://localhost:8889/code/new)
 Get the html page for updating the code snippet
