@@ -6,8 +6,31 @@
 #### GET [/code/{id}](http://localhost:8889/api/code/{id})
 Get code snippet by id
 
+Returns JSON:
+```javascript
+{
+  "code": "CODE SNIPPET",
+  "date": "THE DATE IT WAS POSTED"
+}
+```
+
 #### GET [/code/latest](http://localhost:8889/api/code/latest)
 Get 10 latest code snippets
+
+Returns JSON array:
+```javascript
+[
+  {
+    "code": "CODE SNIPPET 10",
+    "date": "THE DATE IT WAS POSTED"
+  },
+  ...
+  {
+    "code": "CODE SNIPPET 1",
+    "date": "THE DATE IT WAS POSTED"
+  }
+]
+```
 
 #### POST [/code/new](http://localhost:8889/api/code/new)
 Post a code snippet
