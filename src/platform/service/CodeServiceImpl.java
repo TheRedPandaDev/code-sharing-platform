@@ -1,31 +1,41 @@
 package platform.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import platform.model.entity.Code;
 import platform.model.entity.CodeDTO;
-import platform.model.entity.NewCode;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class CodeServiceImpl implements CodeService {
-    private static final String DATE_FORMATTER= "yyyy/MM/dd HH:mm:ss";
+    private static long currentId = 1;
 
-    Code code = new Code("public static void main(String[] args) {\n" +
-            "    SpringApplication.run(CodeSharingPlatform.class, args);\n" +
-            "}", LocalDateTime.now());
+    @Autowired
+    private CodeRepository codeRepository;
+
+    private final String DATE_FORMATTER= "yyyy/MM/dd HH:mm:ss";
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMATTER);
 
     @Override
-    public CodeDTO getSnippet() {
-        CodeDTO codeDTO = new CodeDTO();
-        codeDTO.setCode(code.getCode());
-        codeDTO.setDate(code.getDate().format(DateTimeFormatter.ofPattern(DATE_FORMATTER)));
-        return codeDTO;
+    public Code getCodeById(long id) {
+        return codeRepository.getCodeById(id);
     }
 
     @Override
-    public void updateSnippet(NewCode newCode) {
-        code = new Code(newCode.getCode(), LocalDateTime.now());
+    public long putCode(CodeDTO newCode) {
+        long id = currentId++;
+        LocalDateTime localDateTime = LocalDateTime.now();
+        codeRepository.putCode(
+                new Code(id, newCode.getCode(), formatter.format(localDateTime), localDateTime)
+        );
+        return id;
+    }
+
+    @Override
+    public List<Code> getLatestCode() {
+        return codeRepository.getLatestCode();
     }
 }
