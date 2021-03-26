@@ -22,7 +22,7 @@ import static org.hyperskill.hstest.testing.expect.json.JsonChecker.isString;
 
 public class CodeSharingPlatformTest extends SpringTest {
     public CodeSharingPlatformTest() {
-        super(CodeSharingPlatform.class);
+        super(CodeSharingPlatform.class, "../snippets.mv.db");
     }
 
     final String API_CODE = "/api/code/";
@@ -85,12 +85,12 @@ public class CodeSharingPlatformTest extends SpringTest {
         }
     }
 
-    static Element getSingleTag(Document doc, String url, String tag) {
+    static Element getSingleTag(Element doc, String url, String tag) {
         Elements elems = getElemsByTag(doc, url, tag, 1);
         return elems.get(0);
     }
 
-    static Elements getElemsByTag(Document doc, String url, String tag, int length) {
+    static Elements getElemsByTag(Element doc, String url, String tag, int length) {
         Elements elems = doc.getElementsByTag(tag);
         if (elems.size() != length) {
             throw new WrongAnswer("GET " + url +
@@ -100,7 +100,7 @@ public class CodeSharingPlatformTest extends SpringTest {
         return elems;
     }
 
-    static Element getById(Document doc, String url, String id, String tag) {
+    static Element getById(Element doc, String url, String id, String tag) {
         Element elem = doc.getElementById(id);
 
         if (elem == null) {
@@ -185,6 +185,43 @@ public class CodeSharingPlatformTest extends SpringTest {
         // test 54
         () -> checkApiLatest(13, 12, 11, 10, 9, 8, 7, 6, 5, 4),
         () -> checkWebLatest(13, 12, 11, 10, 9, 8, 7, 6, 5, 4),
+
+        // test 56
+        this::reloadServer,
+
+        // test 57
+        () -> checkApiCode(0),
+        () -> checkWebCode(0),
+        () -> checkApiCode(1),
+        () -> checkWebCode(1),
+        () -> checkApiCode(2),
+        () -> checkWebCode(2),
+        () -> checkApiCode(3),
+        () -> checkWebCode(3),
+        () -> checkApiCode(4),
+        () -> checkWebCode(4),
+        () -> checkApiCode(5),
+        () -> checkWebCode(5),
+        () -> checkApiCode(6),
+        () -> checkWebCode(6),
+        () -> checkApiCode(7),
+        () -> checkWebCode(7),
+        () -> checkApiCode(8),
+        () -> checkWebCode(8),
+        () -> checkApiCode(9),
+        () -> checkWebCode(9),
+        () -> checkApiCode(10),
+        () -> checkWebCode(10),
+        () -> checkApiCode(11),
+        () -> checkWebCode(11),
+        () -> checkApiCode(12),
+        () -> checkWebCode(12),
+        () -> checkApiCode(13),
+        () -> checkWebCode(13),
+
+        // test 85
+        () -> checkApiLatest(13, 12, 11, 10, 9, 8, 7, 6, 5, 4),
+        () -> checkWebLatest(13, 12, 11, 10, 9, 8, 7, 6, 5, 4),
     };
 
     private CheckResult checkApiCode(int id) {
@@ -224,7 +261,9 @@ public class CodeSharingPlatformTest extends SpringTest {
         checkTitle(doc, req, "Code");
 
         Element pre = getById(doc, req, "code_snippet", "pre");
-        String webSnippetCode = pre.text();
+        Element code = getSingleTag(pre, req, "code");
+
+        String webSnippetCode = code.text();
         if (!webSnippetCode.trim().equals(apiSnippet.trim())) {
             return CheckResult.wrong("Web code snippet " +
                 "and api code snippet are different");
@@ -235,6 +274,12 @@ public class CodeSharingPlatformTest extends SpringTest {
         if (!webSnippetDate.trim().equals(apiDate.trim())) {
             return CheckResult.wrong("Web snippet date " +
                 "and api snippet date are different");
+        }
+
+        if (!html.contains("hljs.initHighlightingOnLoad()")) {
+            return CheckResult.wrong(
+                "Can't determine if code highlighting works or not.\n" +
+                "Use \"hljs.initHighlightingOnLoad()\" inside the script tags in the HTML page.");
         }
 
         return CheckResult.correct();
@@ -354,6 +399,15 @@ public class CodeSharingPlatformTest extends SpringTest {
             }
         }
 
+        return CheckResult.correct();
+    }
+
+    private CheckResult reloadServer() {
+        try {
+            reloadSpring();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
         return CheckResult.correct();
     }
 }
