@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class CodeServiceImpl implements CodeService {
-    private static long currentId = 1;
 
     @Autowired
     private CodeRepository codeRepository;
@@ -21,21 +20,22 @@ public class CodeServiceImpl implements CodeService {
 
     @Override
     public Code getCodeById(long id) {
-        return codeRepository.getCodeById(id);
+        return codeRepository.findById(id).orElseThrow();
     }
 
     @Override
     public long putCode(CodeDTO newCode) {
-        long id = currentId++;
         LocalDateTime localDateTime = LocalDateTime.now();
-        codeRepository.putCode(
-                new Code(id, newCode.getCode(), formatter.format(localDateTime), localDateTime)
-        );
-        return id;
+        Code codeToSave = new Code();
+        codeToSave.setCode(newCode.getCode());
+        codeToSave.setDate(formatter.format(localDateTime));
+        codeToSave.setLocalDateTime(localDateTime);
+
+        return codeRepository.save(codeToSave).getId();
     }
 
     @Override
     public List<Code> getLatestCode() {
-        return codeRepository.getLatestCode();
+        return codeRepository.findFirst10ByOrderByLocalDateTimeDesc();
     }
 }
