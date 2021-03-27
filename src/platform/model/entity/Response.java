@@ -9,8 +9,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Response {
     private String id;
-
-    public Response(long id) {
-        this.id = String.valueOf(id);
-    }
 }
