@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <title>Code</title>
@@ -14,8 +14,17 @@
     <!--/*@thymesVar id="code" type="platform.model.entity.Code"*/-->
     <span id="load_date" th:text="${code.date}">
     </span>
+    <div class="restriction" th:if="${code.isViewsLimited()}">
+        <span id="views_restriction" th:text="${code.views}"></span>
+        <span> more views allowed</span>
+    </div>
+    <div class="restriction" th:if="${code.time > 0}">
+        <span>The code will be available for </span>
+        <span id="time_restriction" th:text="${code.time}"></span>
+        <span> seconds</span>
+    </div>
     <pre id="code_snippet">
-        <code th:text="${code.code}" style="background: none;">
+        <code style="background: none;" th:text="${code.code}">
         </code>
     </pre>
 </div>

@@ -11,6 +11,7 @@ import platform.service.CodeService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class APIController {
 
     @GetMapping(path = "/code/{id}")
     @ResponseBody
-    public ResponseEntity<Code> getCodeSnippetById(@PathVariable("id") @Min(1) long id) {
+    public ResponseEntity<Code> getCodeSnippetById(@PathVariable("id") @Size(min = 36, max = 36) String id) {
         return ResponseEntity.ok()
                 .header("Content-Type", "application/json")
                 .body(codeService.getCodeById(id));
@@ -39,7 +40,7 @@ public class APIController {
     @PostMapping(path = "/code/new")
     @ResponseBody
     public ResponseEntity<Response> putCodeSnippet(@RequestBody @Valid CodeDTO newCode) {
-        long id = codeService.putCode(newCode);
+        String id = codeService.putCode(newCode);
         return ResponseEntity.ok()
                 .header("Content-Type", "application/json")
                 .body(new Response(id));

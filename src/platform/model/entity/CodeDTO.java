@@ -12,4 +12,8 @@ import javax.validation.constraints.NotNull;
 public class CodeDTO {
     @NotNull
     private String code;
+    @NotNull
+    private long time;
+    @NotNull
+    private long views;
 }

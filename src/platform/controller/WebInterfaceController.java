@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import platform.service.CodeService;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Controller
 @Validated
@@ -17,7 +17,7 @@ public class WebInterfaceController {
     private CodeService codeService;
 
     @GetMapping(path = "/code/{id}")
-    public String getCodeSnippetById(Model model, @PathVariable("id") @Min(1) long id) {
+    public String getCodeSnippetById(Model model, @PathVariable("id") @Size(min = 36, max = 36) String id) {
         model.addAttribute("code", codeService.getCodeById(id));
         return "codeSnippet";
     }

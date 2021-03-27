@@ -9,6 +9,14 @@
 <body>
 <div>
     <textarea id="code_snippet" placeholder="// write your code here"></textarea>
+    <div class="restriction_input">
+        <label for="time_restriction">Time restriction:</label>
+        <input id="time_restriction" type="text" value="0"/>
+    </div>
+    <div class="restriction_input">
+        <label for="views_restriction">Views restriction:</label>
+        <input id="views_restriction" type="text" value="0"/>
+    </div>
     <button id="send_snippet" th:onclick="send()" type="submit">Submit</button>
 </div>
 </body>

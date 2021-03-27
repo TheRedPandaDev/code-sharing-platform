@@ -4,3 +4,13 @@
     width: 500px;
     height: 150px;
 }
+
+.restriction_input {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#send_snippet {
+    margin-top: 10px;
+}
