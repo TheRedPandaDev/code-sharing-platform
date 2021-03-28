@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CodeRepository extends CrudRepository<Code, String> {
-//    List<Code> findFirst10ByOrderByLocalDateTimeDesc();
+    //    List<Code> findFirst10ByOrderByLocalDateTimeDesc();
     @Query(value = "SELECT * FROM CODE WHERE TIME < 1 AND VIEWS < 1 ORDER BY LOCAL_DATE_TIME DESC LIMIT 10", nativeQuery = true)
     List<Code> getLatestCode();
 }

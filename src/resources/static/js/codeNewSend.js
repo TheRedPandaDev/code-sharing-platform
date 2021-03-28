@@ -11,7 +11,7 @@ function send() {
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", '/api/code/new', false)
-    xhr.onload  = function() {
+    xhr.onload = function () {
         jsonResponse = JSON.parse(xhr.responseText);
     };
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');

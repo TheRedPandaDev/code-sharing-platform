@@ -1,16 +1,15 @@
 package platform.controller;
 
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import platform.model.entity.Code;
 import platform.model.entity.CodeDTO;
 import platform.model.entity.Response;
 import platform.service.CodeService;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.List;
 
