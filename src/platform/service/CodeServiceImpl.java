@@ -8,7 +8,6 @@ import platform.model.entity.Code;
 import platform.model.entity.CodeDTO;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
@@ -16,11 +15,12 @@ import java.util.UUID;
 @Service
 public class CodeServiceImpl implements CodeService {
 
-    private final String DATE_FORMATTER = "yyyy/MM/dd HH:mm:ss";
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMATTER);
+    private final CodeRepository codeRepository;
 
     @Autowired
-    private CodeRepository codeRepository;
+    public CodeServiceImpl(CodeRepository codeRepository) {
+        this.codeRepository = codeRepository;
+    }
 
     @Override
     public Code getCodeById(String id) {
@@ -60,7 +60,6 @@ public class CodeServiceImpl implements CodeService {
         Code codeToSave = new Code();
         codeToSave.setId(UUID.randomUUID().toString());
         codeToSave.setCode(newCode.getCode());
-        codeToSave.setDate(formatter.format(localDateTime));
         codeToSave.setLocalDateTime(localDateTime);
         codeToSave.setTime(newCode.getTime());
         codeToSave.setViews(newCode.getViews());
