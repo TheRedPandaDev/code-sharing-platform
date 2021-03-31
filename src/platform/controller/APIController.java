@@ -17,8 +17,13 @@ import java.util.List;
 @RequestMapping(path = "/api")
 @Validated
 public class APIController {
+
+    private final CodeService codeService;
+
     @Autowired
-    private CodeService codeService;
+    public APIController(CodeService codeService) {
+        this.codeService = codeService;
+    }
 
     @GetMapping(path = "/code/{id}")
     @ResponseBody

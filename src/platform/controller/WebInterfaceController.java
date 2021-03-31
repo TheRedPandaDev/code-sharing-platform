@@ -13,8 +13,13 @@ import javax.validation.constraints.Size;
 @Controller
 @Validated
 public class WebInterfaceController {
+
+    private final CodeService codeService;
+
     @Autowired
-    private CodeService codeService;
+    public WebInterfaceController(CodeService codeService) {
+        this.codeService = codeService;
+    }
 
     @GetMapping(path = "/code/{id}")
     public String getCodeSnippetById(Model model, @PathVariable("id") @Size(min = 36, max = 36) String id) {
